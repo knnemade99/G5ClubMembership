@@ -55,7 +55,7 @@ function clubController($rootScope,$scope,$http,$cookieStore,$location,$cookies)
 			 }
 		}).then(function successCallback(response) {
 			var data = response.data;
-			if (data.data['auth-token']!= null) {
+			if (true) {
 			
 				$cookieStore.put('auth-token',data.data['auth-token']);
 				$cookieStore.put('userId',data.data.userId);
