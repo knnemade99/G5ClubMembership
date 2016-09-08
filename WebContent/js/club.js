@@ -4,7 +4,6 @@ function clubController($rootScope,$scope,$http,$cookieStore,$location,$cookies)
 	$scope.register= function() {
 		$http({
 			method : 'POST',
-			url : 'http://10.20.14.83:9001/users/register',
 			headers : {
 				'Content-Type' : 'application/json',
 				'Access-Control-Allow-Origin': 'http://localhost:9000'
@@ -63,7 +62,7 @@ function clubController($rootScope,$scope,$http,$cookieStore,$location,$cookies)
 		});
 		}
 		$scope.viewload = function(){
-			var $item = $('.carousel .item'); 
+			var $item = $('.carousel .item'); 	//milind correct this line. it is giving exception while running the application
 			var $wHeight = $(window).height()-100;
 			$item.eq(0).addClass('active');
 			$item.height($wHeight); 
