@@ -17,6 +17,10 @@ myClub.config(function($routeProvider){
 			controller: 'ClubController',
 			templateUrl: 'home.html',
 		})
+		.when('/contact', {
+			controller: 'ClubController',
+			templateUrl: 'contact_details.html',
+		})
 		.otherwise({redirectTo: '/'})
 });
 //config ends
