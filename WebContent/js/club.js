@@ -1,6 +1,9 @@
 var myModule = angular.module('ClubMembershipApplication', ['ngRoute','ngCookies']);
 
 function clubController($rootScope,$scope,$http,$cookieStore,$location,$cookies) {
+	
+	
+	//kunal Modules starts
 	$scope.register= function() {
 		$http({
 			method : 'POST',
@@ -30,7 +33,13 @@ function clubController($rootScope,$scope,$http,$cookieStore,$location,$cookies)
 
 		});
 	}
-	$scope.login= function() {
+	//Kunal Modules ends
+	
+	
+	
+	
+	//milind module starts
+		$scope.login= function() {
 		
 		var _uname=$scope.email;
 		var _passwd=$scope.passwd;
@@ -61,6 +70,10 @@ function clubController($rootScope,$scope,$http,$cookieStore,$location,$cookies)
 
 		});
 		}
+		
+	//milind module ends
+	
+	//sonali module starts
 		$scope.viewload = function(){
 			var $item = $('.carousel .item'); 	//milind correct this line. it is giving exception while running the application
 			var $wHeight = $(window).height()-200;
@@ -89,6 +102,10 @@ function clubController($rootScope,$scope,$http,$cookieStore,$location,$cookies)
 			});
 	
 		}
+	//sonali module ends
+	
+	
+	
 	
 }
 
