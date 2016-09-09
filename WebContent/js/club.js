@@ -63,7 +63,7 @@ function clubController($rootScope,$scope,$http,$cookieStore,$location,$cookies)
 		}
 		$scope.viewload = function(){
 			var $item = $('.carousel .item'); 	//milind correct this line. it is giving exception while running the application
-			var $wHeight = $(window).height()-100;
+			var $wHeight = $(window).height()-200;
 			$item.eq(0).addClass('active');
 			$item.height($wHeight); 
 			$item.addClass('full-screen');
