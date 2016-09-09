@@ -9,6 +9,7 @@ function clubController($rootScope,$scope,$http,$cookieStore,$location,$cookies)
 		var TDate=new Date().toLocaleDateString().split("/");
 		var TDate=TDate[0]+TDate[1]+TDate[2];
 		
+		
 		var BDate=new Date($scope.dob).toLocaleDateString().split("/");
 		var BDate=BDate[0]+BDate[1]+BDate[2];
 		console.log($scope.password);
