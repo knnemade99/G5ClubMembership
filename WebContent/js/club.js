@@ -154,10 +154,6 @@ myModule.config(function($routeProvider){
 			controller: 'ClubController',
 			templateUrl: 'login.html'
 		})
-		.when('/signup', {
-			controller: 'ClubController',
-			templateUrl: 'signup.html'
-		})
 		.when('/contact', {
 			controller: 'ClubController',
 			templateUrl: 'contact_details.html'
