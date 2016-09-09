@@ -1,0 +1,15 @@
+.btn-action, .btn-primary
+{
+	background-image: linear-gradient(to bottom, #ff3500 0%, #ff3500 100%);
+}
+#head .btn-default {
+   
+    color: #080808;
+    
+    box-shadow: inset 0px 0px 0px 3px #080808;
+ 
+}
+#head .tagline {
+    color: #080808;
+    
+}

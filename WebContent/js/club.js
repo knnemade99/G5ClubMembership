@@ -80,7 +80,7 @@ function clubController($rootScope,$scope,$http,$cookieStore,$location,$cookies)
 			$item.eq(0).addClass('active');
 			$item.height($wHeight); 
 			$item.addClass('full-screen');
-
+			console.log("inside  viewload");
 			$('.carousel img').each(function() {
 			  var $src = $(this).attr('src');
 			  var $color = $(this).attr('data-color');
@@ -102,6 +102,12 @@ function clubController($rootScope,$scope,$http,$cookieStore,$location,$cookies)
 			});
 	
 		}
+		
+		$scope.bodyload=function(){
+			$scope.viewload();
+			$scope.catload();
+		}
+		
 	//sonali module ends
 	
 	
