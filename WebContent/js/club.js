@@ -102,20 +102,41 @@ function clubController($window,$rootScope,$scope,$http,$cookieStore,$location,$
 			var data=response.data;
 			if (data.id!="failure") {
 				$cookieStore.put("id",data.id);
-				$location.path("/about");							//Redirect to any page after successfull login
+				$cookieStore.put("userType",data.userType);
+				if($cookieStore.get(userType=="User"))
+				$location.path("/user");
+				else
+					$location.path("/staff");	//Redirect to any page after successfull login
+				
 			} else {
 				$scope.mainerror="Invalid User";
 			}		
 		}, function errorCallback(response) {
-			alert("Sameer " + response);
+			alert("Server Error" + response);
 
 		});
 		}
 	
 	}
-	$scope.logout=function(){						//Cleans the cookies on client side
-		$cookieStore.remove("id");
+	$scope.logout=function(){
+		$http({
+			method : 'GET',
+			url : 'http://10.20.14.83:9001/users/logout/'+$cookieStore.get("id"),
+			headers : {
+				'Content-Type' : 'application/json',
+				'Access-Control-Allow-Origin': 'http://localhost:9000'
+			}
+			}).then(function successCallback(response) {
+				$cookieStore.remove("id");
+				$cookieStore.remove("userType");
+				$location.path("/");
+		}, function errorCallback(response) {
+			alert("Server Error. Try After Some time: " + response);
+
+		});
+
 	}
+	
 	$scope.isLogin=function(){   						//Checks for login
 		if($cookieStore.get("id")!=null)
 			return true;
@@ -154,6 +175,14 @@ myModule.config(function($routeProvider){
 		.when('/about', {
 			controller: 'ClubController',
 			templateUrl: 'about.html'
+		})
+		.when('/user', {
+			controller: 'ClubController',
+			templateUrl: 'user.html'
+		})
+		.when('/staff', {
+			controller: 'ClubController',
+			templateUrl: 'staff.html'
 		})
 		.otherwise({redirectTo: '/'})
 });
