@@ -84,7 +84,7 @@ function clubController($window,$rootScope,$scope,$http,$cookieStore,$location,$
 		{
 		$http({
 			method : 'POST',
-			url : 'http://10.20.14.83:9001/users/login',
+			url : 'http://10.20.14.83:9001/users/login', 
 			headers : {
 				'Content-Type' : 'application/json',
 				'Access-Control-Allow-Origin': 'http://localhost:9000'
