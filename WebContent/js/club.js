@@ -103,10 +103,10 @@ function clubController($window,$rootScope,$scope,$http,$cookieStore,$location,$
 			if (data.id!="failure") {
 				$cookieStore.put("id",data.id);
 				$cookieStore.put("userType",data.userType);
-				if($cookieStore.get(userType=="User"))
-				$location.path("/user");
+				if($cookieStore.get("userType")=="User")
+				$location.path("/membership");
 				else
-					$location.path("/staff");	//Redirect to any page after successfull login
+					$location.path("/membership");	//Redirect to any page after successful login
 				
 			} else {
 				$scope.mainerror="Invalid User";
@@ -118,31 +118,32 @@ function clubController($window,$rootScope,$scope,$http,$cookieStore,$location,$
 		}
 	
 	}
-	$scope.logout=function(){
-		$http({
-			method : 'GET',
-			url : 'http://10.20.14.83:9001/users/logout/'+$cookieStore.get("id"),
-			headers : {
-				'Content-Type' : 'application/json',
-				'Access-Control-Allow-Origin': 'http://localhost:9000'
-			}
-			}).then(function successCallback(response) {
-				$cookieStore.remove("id");
-				$cookieStore.remove("userType");
-				$location.path("/");
-		}, function errorCallback(response) {
-			alert("Server Error. Try After Some time: " + response);
-
-		});
-
-	}
-	
 	$scope.isLogin=function(){   						//Checks for login
 		if($cookieStore.get("id")!=null)
 			return true;
 		return false;
 	}
-		
+	$scope.getDetails=function(){
+		  var id=$cookieStore.get("id");
+		  $http({
+		    method: 'GET',
+		    url:'http://10.20.14.83:9001//users/'+id,
+		    headers: {
+		     'Content-Type' : 'application/json',
+		      'Access-Control-Allow-Origin': 'http://10.20.14.83:9001'  
+		    }
+		  })
+		  .then(function successCallback(response){ 
+			   var data=response.data;
+			   $scope.fname=data.firstName+" "+data.lastName;
+			   $scope.email=data.emailId;
+			   $scope.rdate=data.registeredDate;
+			   $scope.mobile=data.mobileNumber;
+			   $scope.entrancefee=data.entranceFee;
+			},
+		  function errorCallback(response) {
+			})
+		 }
 	//milind module ends
 	
 	//sonali module starts
@@ -183,6 +184,10 @@ myModule.config(function($routeProvider){
 		.when('/staff', {
 			controller: 'ClubController',
 			templateUrl: 'staff.html'
+		})
+		.when('/membership', {
+			controller: 'ClubController',
+			templateUrl: 'membership.html'
 		})
 		.otherwise({redirectTo: '/'})
 });
