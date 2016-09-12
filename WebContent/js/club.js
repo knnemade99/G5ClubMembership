@@ -54,6 +54,30 @@ function clubController($window,$rootScope,$scope,$http,$cookieStore,$location,$
 
 		}
 	}
+	
+	
+	$scope.makePayment=function(){
+		console.log($scope.name+$scope.cardno+$scope.month+$scope.year);
+		if($scope.name!=null&&$scope.cardno!=null&&$scope.month!=null&&$scope.year!=null&&$scope.month!='MM'&&$scope.year!='YYYY'&&$scope.month!=''&&$scope.year!=''&&$scope.name!=''&&$scope.cardno!=''){
+			var id=$cookieStore.get('id');
+			$http({
+				method : 'PUT',
+				url : 'http://10.20.14.83:9001/users/'+id,
+				headers : {
+					'Content-Type' : 'application/json',
+					'Access-Control-Allow-Origin': 'http://10.20.14.83:9001'
+				},
+				data : {
+					'userType':'Temporary'
+				}
+			}).success(function (){
+				console.log("Payment done successully");
+			})
+			.error(function (){
+				console.log("Payment not  done");
+			});
+		}
+	}
 	//Kunal Modules ends
 	
 	
@@ -178,6 +202,10 @@ myModule.config(function($routeProvider){
 		.when('/staff', {
 			controller: 'ClubController',
 			templateUrl: 'staff.html'
+		})
+		.when('/pay', {
+			controller: 'ClubController',
+			templateUrl: 'makepayment.html'
 		})
 		.otherwise({redirectTo: '/'})
 });

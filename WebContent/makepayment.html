@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html >
+  <head>
+    <meta charset="UTF-8">
+    <title>Payment Form</title>
+        <link rel="stylesheet" href="css/bootstrap.css">
+       	<link rel="stylesheet" href="css/bootstrap.min.css">
+       	<link rel="stylesheet" href="css/makepayment.css">
+       	<script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+       	<script src='http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js'></script>
+       	<script src="js/jquery.js"></script>
+       	    
+       	<script src="js/angular.min.js"></script>
+       	<script src="js/angular-route.min.js"></script>
+
+
+</head>
+
+  <body>
+
+<div class="container">
+  <div id="Checkout" class="inline">
+      <h1>Pay Invoice</h1>
+      <div class="card-row">
+          <span class="visa"></span>
+          <span class="mastercard"></span>
+          <span class="amex"></span>
+          <span class="discover"></span>
+      </div>
+      <form name='payform'>
+          <div class="form-group" >
+              <label for="PaymentAmount">Payment amount</label>
+              <div class="amount-placeholder">
+                  <span>&#x20B9</span>
+                  <span>1000</span>
+              </div>
+          </div>
+          <div class="form-group">
+              <label or="NameOnCard">Name on card</label>
+              <input id="NameOnCard" class="form-control" type="text" maxlength="255" name='name' ng-model='name' required/>
+              <span class="text-danger" ng-show="payform.name.$touched && payform.name.$invalid" >Name is required.</span>
+          </div>
+          <div class="form-group">
+              <label for="CreditCardNumber">Card number</label>
+              <input id="CreditCardNumber" class="null card-image form-control" type="number" name='cardno' ng-model='cardno' ng-minlength="16" ng-maxlength="16" required/>
+                <p class="text-danger" ng-show="payform.cardno.$touched && payform.cardno.$invalid">Valid Card no required.</p>
+                <p class="text-danger" ng-show="payform.cardno.$error.minlength">Card no. should be 16 digits</p>
+                <p class="text-danger" ng-show="payform.cardno.$error.maxlength">Card no. should be 16 digits</p>
+                 
+          </div>
+          <div class="expiry-date-group form-group">
+              <label for="ExpiryDate">Expiry date</label>
+              <select ng-model='month' ng-init="month='MM'" name='month' required>
+              	<option value='MM'>MM</option>
+              	<option>01</option>
+              	<option>02</option>
+              	<option>03</option>
+              	<option>04</option>
+              	<option>05</option>
+              	<option>06</option>
+              	<option>07</option>
+              	<option>08</option>
+              	<option>09</option>
+              	<option>10</option>
+              	<option>11</option>
+              	<option>12</option>
+            </select>
+            
+            
+              <select id="year" ng-model='year' ng-init="year='YYYY'">
+              	<option value='YYYY'>YYYY</option>
+              	<option>2016</option>
+              	<option>2017</option>
+              	<option>2018</option>
+              	<option>2019</option>
+              	<option>2020</option>
+              </select>
+          </div>
+
+
+          <button id="PayButton" class="btn btn-block btn-success submit-button" type="button" ng-click="makePayment()">
+              <span class="submit-button-lock"></span>
+              <span class="align-middle">Pay &#x20B9 1000</span>
+          </button>
+      </form>
+  </div>
+</div>
+
+
+
+
+
+    
+    
+    
+  </body>
+</html>
