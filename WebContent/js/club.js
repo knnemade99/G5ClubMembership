@@ -122,7 +122,7 @@ function clubController($window,$rootScope,$scope,$http,$cookieStore,$location,$
 			if (data.id!="failure") {
 				$cookieStore.put("id",data.id);
 				$cookieStore.put("userType",data.userType);
-				if($cookieStore.get(userType=="User"))
+				if($cookieStore.get("userType")=="User")
 				$location.path("/user");
 				else
 					$location.path("/staff");	//Redirect to any page after successfull login
