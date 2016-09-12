@@ -48,6 +48,7 @@
                 <p class="text-danger" ng-show="payform.cardno.$error.maxlength">Card no. should be 16 digits</p>
                  
           </div>
+          
           <div class="expiry-date-group form-group">
               <label for="ExpiryDate">Expiry date</label>
               <select ng-model='month' ng-init="month='MM'" name='month' required>
@@ -75,6 +76,16 @@
               	<option>2019</option>
               	<option>2020</option>
               </select>
+          </div>
+          
+          
+              <div class="form-group" height="10px" width="10px">
+              <label for="CreditCardNumber">CVV</label>
+              <input id="CreditCardNumber" type="number" name='cvv' ng-model='cvv' ng-minlength="3" ng-maxlength="4" required/>
+                <p id="CreditCardNumber" class="text-danger" ng-show="payform.cvv.$touched && payform.cvv.$invalid">Valid CVV required.</p>
+                <p id="CreditCardNumber" class="text-danger" ng-show="payform.cvv.$error.minlength">Valid CVV required</p>
+                <p id="CreditCardNumber" class="text-danger" ng-show="payform.cvv.$error.maxlength">Valid CVV required</p>
+                 
           </div>
 
 

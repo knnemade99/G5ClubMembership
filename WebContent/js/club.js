@@ -57,9 +57,11 @@ function clubController($window,$rootScope,$scope,$http,$cookieStore,$location,$
 	
 	
 	$scope.makePayment=function(){
+		
 		console.log($scope.name+$scope.cardno+$scope.month+$scope.year);
 		if($scope.name!=null&&$scope.cardno!=null&&$scope.month!=null&&$scope.year!=null&&$scope.month!='MM'&&$scope.year!='YYYY'&&$scope.month!=''&&$scope.year!=''&&$scope.name!=''&&$scope.cardno!=''){
 			var id=$cookieStore.get('id');
+			console.log(id);
 			$http({
 				method : 'PUT',
 				url : 'http://10.20.14.83:9001/users/'+id,
@@ -123,7 +125,7 @@ function clubController($window,$rootScope,$scope,$http,$cookieStore,$location,$
 				$cookieStore.put("id",data.id);
 				$cookieStore.put("userType",data.userType);
 				if($cookieStore.get("userType")=="User")
-				$location.path("/user");
+				$location.path("/membership");
 				else
 					$location.path("/staff");	//Redirect to any page after successfull login
 				
@@ -231,6 +233,10 @@ myModule.config(function($routeProvider){
 		.when('/pay', {
 			controller: 'ClubController',
 			templateUrl: 'makepayment.html'
+		})
+		.when('/membership', {
+			controller: 'ClubController',
+			templateUrl: 'membership.html'
 		})
 		.otherwise({redirectTo: '/'})
 });
