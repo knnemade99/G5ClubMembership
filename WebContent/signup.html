@@ -42,7 +42,7 @@
                   <span class="text-danger" ng-show="signupform.email.$touched && signupform.email.$invalid">Valid Email is required.</span>
                 </div>
                 <div class='col-md-11'>
-                  <input class='form-control' id='id_phone' placeholder='Phone: (xxx) - xxx xxxx' type='number' ng-model="phone">
+                  <input class='form-control' id='id_phone' placeholder='Phone: (xxx) - xxx xxxx' type='number' name="phone" ng-model="phone">
                 </div>
               </div>
             
@@ -67,7 +67,7 @@
             <div class='col-md-8'>
               <div class='col-md-3'>
                 <div class='form-group internal input-group'>
-                  <input type="text" class='form-control' id='id_phone' placeholder='Occupation' rows='3' ng-model="occupation">
+                  <input type="text" class='form-control' id='id_phone' placeholder='Occupation' rows='3' name="occupation" ng-model="occupation">
                  
                 </div>
               </div>
@@ -81,19 +81,32 @@
             <div class='col-md-3'>
               <div class='form-group'>
                 <div class='col-md-11'>
-                  <input type="password" name='pass' placeholder="Password" id="password" ng-model="password" ng-minlength="8" ng-maxlength="20"  required/>
+                  <input type="password" name='pass' placeholder="Password" id="pass" ng-model="pass" ng-minlength="8" ng-maxlength="20"  required/>
                   <p class="text-danger" ng-show="signupform.pass.$touched&&signupform.pass.$invalid">Password is required.</p>
                   <p class="text-danger" ng-show="signupform.pass.$error.minlength">Password should be greater than 8 characters</p>
                   <p class="text-danger" ng-show="signupform.pass.$error.minlength">Password should be less than 20 characters</p>
                 </div>
-                
-               
-              </div>
-            
+            </div>
             </div>
           </div>
+          
+          
+           
         
-
+			  <div class='form-group'>
+            <label class='control-label col-md-2 col-md-offset-2' for='id_email'>Confirm Password</label>
+            <div class='col-md-3'>
+              <div class='form-group'>
+                <div class='col-md-11'>
+                  <input type="password" name='pass2' placeholder="Confirm Password" id="pass2" ng-model="pass2" required/>
+                  <p class="text-danger" ng-show="(signupform.pass2.$viewValue != '' && (signupform.pass.$viewValue != signupform.pass2.$viewValue))">Fields do not match!</p>
+                </div>
+            </div>
+            </div>
+          </div>
+          
+	
+	
 
           <div class='form-group'>
             <div class='col-md-offset-4 col-md-3'>
