@@ -13,19 +13,15 @@ function clubController($window,$rootScope,$scope,$http,$cookieStore,$location,$
 		var BDate=new Date($scope.dob).toLocaleDateString().split("/");
 		var BDate=BDate[0]+BDate[1]+BDate[2];
 		console.log($scope.pass);
-		if($scope.password!=$scope.confirm_password)
-		{
-			console.log("inif");
-			$scope.confirm_error="Password don't Match";
-		}
-
 		console.log(BDate);
+		console.log("phone: "+$scope.phone+" length- "+($scope.phone+"").length);
 		console.log(TDate);
 		console.log($scope.fname);
 		console.log($scope.lname);
-		console.log($scope.email+" "+BDate+" "+$scope.phone+" "+$scope.occupation+" "+TDate+" "+" "+$scope.pass);
+		console.log(($scope.phone+"").length);
+		console.log($scope.email+" "+BDate+""+$scope.phone+" "+$scope.occupation+" "+TDate+" "+" "+$scope.pass);
 		
-		if($scope.fname!=""&&$scope.fname!=null&&$scope.lname!=""&&$scope.lname!=null&&$scope.email!=""&&$scope.email!=null&&$scope.pass!=""&&$scope.pass!=null&&TDate!=""&&TDate!=null&&BDate!=""&&BDate!=null&&$scope.pass2==$scope.pass){
+		if($scope.fname!=""&&$scope.fname!=null&&$scope.lname!=""&&$scope.lname!=null&&$scope.email!=""&&$scope.email!=null&&$scope.pass!=""&&$scope.pass!=null&&TDate!=""&&TDate!=null&&BDate!=""&&BDate!=null&&$scope.pass2==$scope.pass&&($scope.phone+"").length==10){
 			console.log("inside if");
 		$http({
 			method : 'POST',
@@ -39,10 +35,10 @@ function clubController($window,$rootScope,$scope,$http,$cookieStore,$location,$
 				 lastName:$scope.lname, 
 				 emailId:$scope.email, 
 				 dateOfBirth:BDate, 
-				 mobileNumber:$scope.phone, 
+				 mobileNumber:$scope.phone+"", 
 				 occupation:$scope.occupation, 
 				 registeredDate:TDate, 
-				 password:$scope.password, 
+				 password:$scope.pass, 
 				 status:0,
 				 userType:"User", 
 				 entranceFee: 1000, 

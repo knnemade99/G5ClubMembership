@@ -42,7 +42,11 @@
                   <span class="text-danger" ng-show="signupform.email.$touched && signupform.email.$invalid">Valid Email is required.</span>
                 </div>
                 <div class='col-md-11'>
-                  <input class='form-control' id='id_phone' placeholder='Phone: (xxx) - xxx xxxx' type='number' name="phone" ng-model="phone">
+                  <input class='form-control' id='id_phone' placeholder='Phone: (xxx) - xxx xxxx' type='number' name="phone" ng-model="phone" ng-minlength="10" ng-maxlength="10" required/>
+                  <p class="text-danger" ng-show="signupform.phone.$touched && signupform.phone.$invalid">Valid Phone is required.</p>
+                  <p class="text-danger" ng-show="signupform.phone.$error.minlength">Phone should be 10 digits</p>
+                  <p class="text-danger" ng-show="signupform.phone.$error.maxlength">Phone should be 10 digits</p>
+                 
                 </div>
               </div>
             
@@ -56,7 +60,6 @@
                 <div class='form-group internal input-group'>
                   <input type="date" name='dob' ng-model='dob' class='form-control datepicker' required>
                   <span class="text-danger" ng-show="signupform.dob.$touched && signupform.dob.$invalid">Valid Date is required.</span>
-
                 </div>
               </div>
           </div>
