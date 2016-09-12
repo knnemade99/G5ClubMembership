@@ -132,7 +132,9 @@ function clubController($window,$rootScope,$scope,$http,$cookieStore,$location,$
 			   var data=response.data;
 			   $scope.fname=data.firstName+" "+data.lastName;
 			   $scope.email=data.emailId;
+			   console.log(data.registeredDate);
 			   $scope.rdate=data.registeredDate;
+			   
 			   $scope.mobile=data.mobileNumber;
 			   $scope.entrancefee=data.entranceFee;
 			},
