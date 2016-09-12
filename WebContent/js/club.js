@@ -59,11 +59,29 @@ function clubController($window,$rootScope,$scope,$http,$cookieStore,$location,$
 	
 	
 	
+	
 	//milind module starts
-		$scope.login= function() {
+	$scope.login= function() {
 		
-		var _uname=$scope.email;
-		var _passwd=$scope.passwd;
+		
+		$scope.errorMsgPassword="";
+		$scope.errorMsgUserName="";
+		$scope.errorMsg="";
+		
+		var em=$scope.email;
+		var p=$scope.password;
+		
+		if(em==""||em==null)
+			$scope.errorMsgUserName="Enter UserName";
+		if(p==""||p==null)
+			$scope.errorMsgPassword="Enter Password";
+		
+		var _mail=$scope.email;
+		
+		var _passwd=$scope.password;
+		
+		if(p!=null&&p!=""&&em!=null&&em!="")
+		{
 		$http({
 			method : 'POST',
 			url : 'http://10.20.14.83:9001/users/login',
@@ -72,25 +90,53 @@ function clubController($window,$rootScope,$scope,$http,$cookieStore,$location,$
 				'Access-Control-Allow-Origin': 'http://localhost:9000'
 			},
 			data : {
-				emailId : _uname,
+				emailId : _mail,
 				password : _passwd
 			 }
 		}).then(function successCallback(response) {
-			var data = response.data;
-			if (true) {
-			
-				$cookieStore.put('auth-token',data.data['auth-token']);
-				$cookieStore.put('userId',data.data.userId);
-				$location.path("#/");
-			
+			var data=response.data;
+			if (data.id!="failure") {
+				$cookieStore.put("id",data.id);
+				$cookieStore.put("userType",data.userType);
+				if($cookieStore.get(userType=="User"))
+				$location.path("/user");
+				else
+					$location.path("/staff");	//Redirect to any page after successfull login
+				
 			} else {
-				alert("Invalid Credentials");
+				$scope.mainerror="Invalid User";
 			}		
+		}, function errorCallback(response) {
+			alert("Server Error" + response);
+
+		});
+		}
+	
+	}
+	$scope.logout=function(){
+		$http({
+			method : 'GET',
+			url : 'http://10.20.14.83:9001/users/logout/'+$cookieStore.get("id"),
+			headers : {
+				'Content-Type' : 'application/json',
+				'Access-Control-Allow-Origin': 'http://localhost:9000'
+			}
+			}).then(function successCallback(response) {
+				$cookieStore.remove("id");
+				$cookieStore.remove("userType");
+				$location.path("/");
 		}, function errorCallback(response) {
 			alert("Server Error. Try After Some time: " + response);
 
 		});
-		}
+
+	}
+	
+	$scope.isLogin=function(){   						//Checks for login
+		if($cookieStore.get("id")!=null)
+			return true;
+		return false;
+	}
 		
 	//milind module ends
 	
@@ -124,6 +170,14 @@ myModule.config(function($routeProvider){
 		.when('/about', {
 			controller: 'ClubController',
 			templateUrl: 'about.html'
+		})
+		.when('/user', {
+			controller: 'ClubController',
+			templateUrl: 'user.html'
+		})
+		.when('/staff', {
+			controller: 'ClubController',
+			templateUrl: 'staff.html'
 		})
 		.otherwise({redirectTo: '/'})
 });
