@@ -14,7 +14,7 @@ function clubController($window,$rootScope,$scope,$http,$cookieStore,$location,$
 		var BDate=BDate[0]+BDate[1]+BDate[2];
 		console.log($scope.pass);
 		console.log(BDate);
-		console.log("phone: "+$scope.phone+" length- "+($scope.phone+"").length);
+		console.log("phone: "+$scope.phone+" length- "+($scope.phone+"").length); 
 		console.log(TDate);
 		console.log($scope.fname);
 		console.log($scope.lname);
