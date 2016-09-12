@@ -100,39 +100,7 @@ function clubController($rootScope,$scope,$http,$cookieStore,$location,$cookies)
 	//milind module ends
 	
 	//sonali module starts
-		$scope.viewload = function(){
-			var $item = $('.carousel .item'); 	//milind correct this line. it is giving exception while running the application
-			var $wHeight = $(window).height()-100;
-			$item.eq(0).addClass('active');
-			$item.height($wHeight); 
-			$item.addClass('full-screen');
-			console.log("inside  viewload");
-			$('.carousel img').each(function() {
-			  var $src = $(this).attr('src');
-			  var $color = $(this).attr('data-color');
-			  $(this).parent().css({
-			    'background-image' : 'url(' + $src + ')',
-			    'background-color' : $color
-			  });
-			  $(this).remove();
-			});
-
-			$(window).on('resize', function (){
-			  $wHeight = $(window).height();
-			  $item.height($wHeight);
-			});
-
-			$('.carousel').carousel({
-			  interval: 6000,
-			  pause: "false"
-			});
-	
-		}
 		
-		$scope.bodyload=function(){
-			$scope.viewload();
-			$scope.catload();
-		}
 		
 	//sonali module ends
 	
@@ -145,10 +113,7 @@ myModule.controller('ClubController', clubController);
 
 myModule.config(function($routeProvider){
 	$routeProvider
-		.when('/test', {									// Correct it Milind
-			controller: 'ClubController',
-			templateUrl: 'index.html'   					//Taken just for testing/ developing purpose
-		})
+	
 		.when('/', {
 			controller: 'ClubController',
 			templateUrl: 'home.html'   					//Taken just for testing/ developing purpose
