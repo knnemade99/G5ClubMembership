@@ -161,7 +161,32 @@ function clubController($window,$rootScope,$scope,$http,$cookieStore,$location,$
 			return true;
 		return false;
 	}
+
 		
+
+	$scope.getDetails=function(){
+		  var id=$cookieStore.get("id");
+		  $http({
+		    method: 'GET',
+		    url:'http://10.20.14.83:9001//users/'+id,
+		    headers: {
+		     'Content-Type' : 'application/json',
+		      'Access-Control-Allow-Origin': 'http://10.20.14.83:9001'  
+		    }
+		  })
+		  .then(function successCallback(response){ 
+			   var data=response.data;
+			   $scope.fname=data.firstName+" "+data.lastName;
+			   $scope.email=data.emailId;
+			   console.log(data.registeredDate);
+			   $scope.rdate=data.registeredDate;
+			   
+			   $scope.mobile=data.mobileNumber;
+			   $scope.entrancefee=data.entranceFee;
+			},
+		  function errorCallback(response) {
+			})
+		 }
 	//milind module ends
 	
 	//sonali module starts
