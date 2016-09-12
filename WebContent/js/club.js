@@ -13,7 +13,6 @@ function clubController($window,$rootScope,$scope,$http,$cookieStore,$location,$
 		var BDate=new Date($scope.dob).toLocaleDateString().split("/");
 		var BDate=BDate[0]+BDate[1]+BDate[2];
 		console.log($scope.password);
-		console.log($scope.confirm_password);
 		if($scope.password!=$scope.confirm_password)
 		{
 			console.log("inif");
@@ -27,7 +26,7 @@ function clubController($window,$rootScope,$scope,$http,$cookieStore,$location,$
 		console.log($scope.email+" "+BDate+" "+$scope.phone+" "+$scope.occupation+" "+TDate+" "+" "+$scope.password);
 		
 		if($scope.fname!=""&&$scope.fname!=null&&$scope.lname!=""&&$scope.lname!=null&&$scope.email!=""&&$scope.email!=null&&$scope.password!=""&&$scope.password!=null&&TDate!=""&&TDate!=null&&BDate!=""&&BDate!=null){
-			
+			console.log("inside if");
 		$http({
 			method : 'POST',
 			url : 'http://10.20.14.83:9001/users/register',
