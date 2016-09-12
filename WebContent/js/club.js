@@ -102,12 +102,12 @@ function clubController($window,$rootScope,$scope,$http,$cookieStore,$location,$
 			var data=response.data;
 			if (data.id!="failure") {
 				$cookieStore.put("id",data.id);
-				$location.path("/about");							//Redirect to any page after successfull login
+				$location.path("/user");							//Redirect to any page after successfull login
 			} else {
 				$scope.mainerror="Invalid User";
 			}		
 		}, function errorCallback(response) {
-			alert("Sameer " + response);
+			alert("Error " + response);
 
 		});
 		}
@@ -154,6 +154,10 @@ myModule.config(function($routeProvider){
 		.when('/about', {
 			controller: 'ClubController',
 			templateUrl: 'about.html'
+		})
+		.when('/user', {
+			controller: 'ClubController',
+			templateUrl: 'user.html'   					//Taken just for testing/ developing purpose
 		})
 		.otherwise({redirectTo: '/'})
 });
