@@ -90,3 +90,18 @@
     background-color: #ff3500;
     border-color: #ff3500;
 }
+a.fac:link{
+	color:black;
+}
+*[role="form"] {
+    max-width: 530px;
+    padding: 15px;
+    margin: 0 auto;
+    background-color: #fff;
+    border-radius: 0.3em;
+}
+
+*[role="form"] h2 {
+    margin-left: 5em;
+    margin-bottom: 1em;
+}
