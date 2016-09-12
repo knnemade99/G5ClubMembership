@@ -89,7 +89,7 @@ function clubController($window,$rootScope,$scope,$http,$cookieStore,$location,$
 	
 	
 	//milind module starts
-	$scope.login= function() {
+$scope.login= function() {
 		
 		
 		$scope.errorMsgPassword="";
@@ -125,76 +125,86 @@ function clubController($window,$rootScope,$scope,$http,$cookieStore,$location,$
 			var data=response.data;
 			if (data.id!="failure") {
 				$cookieStore.put("id",data.id);
-				$cookieStore.put("userType",data.userType);
-				if($cookieStore.get("userType")=="User")
-				$location.path("/membership");
-				else
-					$location.path("/staff");	//Redirect to any page after successfull login
+				$location.path("/user");							//Redirect to any page after successfull login
 				
 			} else {
 				$scope.mainerror="Invalid User";
 			}		
+
 		}, function errorCallback(response) {
-			alert("Server Error" + response);
+			alert("Error " + response);
 
 		});
 		}
 	
 	}
-	$scope.logout=function(){
-		$http({
-			method : 'GET',
-			url : 'http://10.20.14.83:9001/users/logout/'+$cookieStore.get("id"),
-			headers : {
-				'Content-Type' : 'application/json',
-				'Access-Control-Allow-Origin': 'http://localhost:9000'
-			}
-			}).then(function successCallback(response) {
-				$cookieStore.remove("id");
-				$cookieStore.remove("userType");
-				$location.path("/");
-		}, function errorCallback(response) {
-			alert("Server Error. Try After Some time: " + response);
-
-		});
-
+	$scope.logout=function(){						//Cleans the cookies on client side
+		$cookieStore.remove("id");
 	}
-	
 	$scope.isLogin=function(){   						//Checks for login
 		if($cookieStore.get("id")!=null)
 			return true;
 		return false;
 	}
 
+	$scope.getAccountDetails=function(){
+			  var id=$cookieStore.get("id");
+			  $http({
+			    method: 'GET',
+			    url:'http://10.20.14.83:9001/users/'+id,
+			    headers: {
+			     'Content-Type' : 'application/json',
+			      'Access-Control-Allow-Origin': 'http://10.20.14.83:9001'  
+			    }
+			  })
+			  .then(function successCallback(response){ 
+				   var data=response.data;
+				   $scope.fname=data.firstName+" "+data.lastName;
+				   $scope.email=data.emailId;
+				   console.log(data.registeredDate);
+				   $scope.rdate=new Date(data.registeredDate);
+				   $scope.mobile=data.mobileNumber;
+				   $scope.user=data.userType;
+				   
+				   $scope.entrancefee=data.entranceFee;
+				},
+			  function errorCallback(response) {
+				})
+			 }
 		
-
-	$scope.getDetails=function(){
-		  var id=$cookieStore.get("id");
-		  $http({
-		    method: 'GET',
-		    url:'http://10.20.14.83:9001//users/'+id,
-		    headers: {
-		     'Content-Type' : 'application/json',
-		      'Access-Control-Allow-Origin': 'http://10.20.14.83:9001'  
-		    }
-		  })
-		  .then(function successCallback(response){ 
-			   var data=response.data;
-			   $scope.fname=data.firstName+" "+data.lastName;
-			   $scope.email=data.emailId;
-			   console.log(data.registeredDate);
-			   $scope.rdate=data.registeredDate;
-			   
-			   $scope.mobile=data.mobileNumber;
-			   $scope.entrancefee=data.entranceFee;
-			},
-		  function errorCallback(response) {
-			})
-		 }
 	//milind module ends
 	
 	//sonali module starts
+	
+	$scope.getDetails=function(){
+		var id=$cookieStore.get("id");
+		$http({
+		  method: 'GET',
+		  url:'http://10.20.14.83:9001//users/'+id,
+		  headers: {
+			  'Content-Type' : 'application/json',
+			   'Access-Control-Allow-Origin': 'http://10.20.14.83:9001'  
+		  }
+		})
+		.then(function successCallback(response) 
+		{ 
+			var data=response.data;
+			$scope.fname=data.firstName;
+			$scope.lname=data.lastName;
+			$scope.email=data.emailId;
+			$scope.dob=data.dateOfBirth;
+			$scope.mobile=data.mobileNumber;
+			$scope.entrancefee=data.entranceFee;
+			
+		},
+		 
+          function errorCallback(response)
+		  {
+		    
+		  })
+		  $location.path('/user');
 		
+	}
 		
 	//sonali module ends
 }
@@ -232,9 +242,17 @@ myModule.config(function($routeProvider){
 			controller: 'ClubController',
 			templateUrl: 'staff.html'
 		})
+		.when('/indoor', {
+			controller: 'ClubController',
+			templateUrl: 'indoor.html'   					//Taken just for testing/ developing purpose
+		})
 		.when('/pay', {
 			controller: 'ClubController',
 			templateUrl: 'makepayment.html'
+		})
+				.when('/tmember', {
+			controller: 'ClubController',
+			templateUrl: 'member.html'   					//Taken just for testing/ developing purpose
 		})
 		.when('/membership', {
 			controller: 'ClubController',

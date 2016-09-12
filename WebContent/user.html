@@ -1,0 +1,43 @@
+<div class="container" ng-init='getDetails()'>
+<div class="row">
+<div class="col-lg-6">
+            <form class="form-horizontal" role="form">
+                <h2>User Details</h2>
+                <div class="form-group">
+                    <label for="firstName" class="col-sm-3 control-label">Full Name</label>
+                    <div class="col-sm-9">
+                        <label class="col-sm-3 control-label">{{fname}} {{lname}}</label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="email" class="col-sm-3 control-label">Email</label>
+                    <div class="col-sm-9">
+                        <label class="col-sm-3 control-label">{{email}}</label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="mobile" class="col-sm-3 control-label">Mobile</label>
+                    <div class="col-sm-9">
+                        <label class="col-sm-3 control-label">{{mobile}}</label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="birthDate" class="col-sm-3 control-label">Date of Birth</label>
+                    <div class="col-sm-9">
+                        <label class="col-sm-3 control-label">{{dob | date:'short'}}</label>
+                    </div>
+                </div>
+                 <div class="form-group">
+                    <label for="birthDate" class="col-sm-3 control-label">Entrance</label>
+                    <div class="col-sm-9">
+                        <label class="col-sm-3 control-label">{{entrancefee}}</label>
+                    </div>
+                </div>
+            </form> </div><!-- /form -->
+            <div class="col-lg-6">
+            <div class="mem">
+            <a href="#tmember" > Apply for Temporary Member</a><br><br>
+            <a href="#pmember" > Apply for Permanent Member</a>
+            </div>
+        </div>
+        </div> <!-- ./container -->
